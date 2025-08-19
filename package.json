@@ -1,9 +1,14 @@
 {
   "name": "desktop",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Angular desktop development template.",
+  "author": "Jane Doe",
   "main": "main.js",
   "scripts": {
-    "start": "concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && electron .\""
+    "start": "concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && electron-forge start\"",
+    "build": "ng build",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "prettier": {
     "printWidth": 100,
@@ -29,6 +34,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
+    "electron-squirrel-startup": "^1.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -37,6 +43,14 @@
     "@angular/cli": "^20.1.6",
     "@angular/compiler-cli": "^20.1.0",
     "@angular/localize": "^20.1.0",
+    "@electron-forge/cli": "^7.8.3",
+    "@electron-forge/maker-deb": "^7.8.3",
+    "@electron-forge/maker-rpm": "^7.8.3",
+    "@electron-forge/maker-squirrel": "^7.8.3",
+    "@electron-forge/maker-zip": "^7.8.3",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.3",
+    "@electron-forge/plugin-fuses": "^7.8.3",
+    "@electron/fuses": "^1.8.0",
     "@types/jasmine": "~5.1.0",
     "concurrently": "^9.2.0",
     "electron": "^37.3.1",
