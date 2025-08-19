@@ -1,6 +1,7 @@
 'use strict';
 
 const { app, BrowserWindow, Menu } = require('electron/main');
+const electronSquirrelStartup = require('electron-squirrel-startup');
 const path = require('path');
 const url = require('url');
 
@@ -23,6 +24,10 @@ const createWindow = () => {
     win.webContents.openDevTools({ mode: 'detach' });
   }
 };
+
+if (electronSquirrelStartup) {
+  app.quit();
+}
 
 app.whenReady().then(() => {
   createWindow();
