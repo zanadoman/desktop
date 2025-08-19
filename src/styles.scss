@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS files. */
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+$body-bg: $body-bg;
+$body-color: $body-color;
+
+$body-bg-dark: $body-bg-dark;
+$body-color-dark: $body-color-dark;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
