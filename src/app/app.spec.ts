@@ -1,25 +1,60 @@
 import { provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { By } from '@angular/platform-browser';
 
 describe('App', () => {
+  let fixture: ComponentFixture<App>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideZonelessChangeDetection()]
     }).compileComponents();
-  });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
   });
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Desktop');
+    const title = fixture.debugElement.query(
+      By.css('[data-testid="app-title"]')
+    ).nativeElement;
+    expect(title.textContent).toBe('Hello, Desktop');
+  });
+
+  it('should render count', () => {
+    const count = fixture.debugElement.query(
+      By.css('[data-testid="app-count"]')
+    ).nativeElement;
+    expect(count.textContent).toBe(' 0 ');
+  });
+
+  it('should decrement count', () => {
+    const decrement = fixture.debugElement.query(
+      By.css('[data-testid="app-decrement"]')
+    ).nativeElement;
+    const count = fixture.debugElement.query(
+      By.css('[data-testid="app-count"]')
+    ).nativeElement;
+    for (let i = 0; -10 < i; i--) {
+      decrement.click();
+      fixture.detectChanges();
+      expect(count.textContent).toBe(` ${i - 1} `);
+    }
+  });
+
+  it('should increment count', () => {
+    const increment = fixture.debugElement.query(
+      By.css('[data-testid="app-increment"]')
+    ).nativeElement;
+    const count = fixture.debugElement.query(
+      By.css('[data-testid="app-count"]')
+    ).nativeElement;
+    for (let i = 0; i < 10; i++) {
+      increment.click();
+      fixture.detectChanges();
+      expect(count.textContent).toBe(` ${i + 1} `);
+    }
   });
 });
