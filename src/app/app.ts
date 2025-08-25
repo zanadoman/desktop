@@ -12,9 +12,11 @@ export class App {
 
   protected decrement(): void {
     this.count.update(value => value - 1);
+    window.electronAPI.log(`Count: ${this.count()}`);
   }
 
   protected increment(): void {
     this.count.update(value => value + 1);
+    window.electronAPI.log(`Count: ${this.count()}`);
   }
 }

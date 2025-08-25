@@ -1,6 +1,6 @@
 'use strict';
 
-const { app, BrowserWindow, Menu } = require('electron/main');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron/main');
 const electronSquirrelStartup = require('electron-squirrel-startup');
 const path = require('path');
 const url = require('url');
@@ -8,7 +8,10 @@ const url = require('url');
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, '/preload.js')
+    }
   });
 
   Menu.setApplicationMenu(null);
@@ -30,6 +33,10 @@ if (electronSquirrelStartup) {
 }
 
 app.whenReady().then(() => {
+  ipcMain.on('log', (_, message) => {
+    console.log(message);
+  });
+
   createWindow();
 
   app.on('activate', () => {

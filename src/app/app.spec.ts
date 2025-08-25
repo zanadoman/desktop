@@ -7,6 +7,10 @@ describe('App', () => {
   let fixture: ComponentFixture<App>;
 
   beforeEach(async () => {
+    window.electronAPI = {
+      log: jasmine.createSpy('log')
+    };
+
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideZonelessChangeDetection()]
@@ -41,6 +45,7 @@ describe('App', () => {
       decrement.click();
       fixture.detectChanges();
       expect(count.textContent).toBe(` ${i - 1} `);
+      expect(window.electronAPI.log).toHaveBeenCalledWith(`Count: ${i - 1}`);
     }
   });
 
@@ -55,6 +60,7 @@ describe('App', () => {
       increment.click();
       fixture.detectChanges();
       expect(count.textContent).toBe(` ${i + 1} `);
+      expect(window.electronAPI.log).toHaveBeenCalledWith(`Count: ${i + 1}`);
     }
   });
 });
