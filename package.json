@@ -9,6 +9,7 @@
     "build": "ng build",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "test": "concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && playwright test\"",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless"
   },
   "prettier": {
@@ -54,6 +55,7 @@
     "@electron-forge/plugin-fuses": "^7.8.3",
     "@electron-forge/publisher-github": "^7.8.3",
     "@electron/fuses": "^1.8.0",
+    "@playwright/test": "^1.55.0",
     "@types/jasmine": "~5.1.0",
     "concurrently": "^9.2.0",
     "electron": "^37.3.1",
