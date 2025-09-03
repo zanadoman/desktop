@@ -2,7 +2,9 @@
 
 const { app, BrowserWindow, Menu, ipcMain } = require('electron/main');
 const electronSquirrelStartup = require('electron-squirrel-startup');
+const log = require('electron-log');
 const path = require('path');
+const { updateElectronApp, UpdateSourceType } = require('update-electron-app');
 const url = require('url');
 
 const createWindow = () => {
@@ -31,6 +33,14 @@ const createWindow = () => {
 if (electronSquirrelStartup) {
   app.quit();
 }
+
+updateElectronApp({
+  updateSource: {
+    type: UpdateSourceType.ElectronPublicUpdateService,
+    repo: 'zanadoman/desktop'
+  },
+  logger: log
+});
 
 app.whenReady().then(() => {
   ipcMain.on('log', (_, message) => {
