@@ -9,6 +9,7 @@
     "build": "ng build",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "publish": "electron-forge publish --platform=win32",
     "test": "concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && playwright test\"",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI"
   },
